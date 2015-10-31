@@ -1,7 +1,7 @@
 {
-	"name": "laravel/laravel",
-	"description": "The Laravel Framework.",
-	"keywords": ["framework", "laravel"],
+	"name": "iBookNow/iBookNow",
+	"description": "Instantly booking system for education between Teacher Assistants and Students.",
+	"keywords": ["iBookNow", "booking"],
 	"license": "MIT",
 	"type": "project",
 	"require": {
@@ -16,7 +16,7 @@
 			"database"
 		],
 		"psr-4": {
-			"App\\": "app/"
+			"app\\": "app/"
 		}
 	},
 	"autoload-dev": {

@@ -1,3 +1,6 @@
+/dev
 /vendor
 /node_modules
 .env
+*.swp
+*.swo

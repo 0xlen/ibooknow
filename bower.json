@@ -1,0 +1,27 @@
+{
+  "name": "iBookNow",
+  "authors": [
+    "Eason Cao <0xlen@ntut.edu.tw>"
+  ],
+  "description": "Instantly booking system for education between Teacher Assistants and Students.",
+  "main": "",
+  "moduleType": [
+    "globals"
+  ],
+  "keywords": [
+    "iBookNow"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "fullcalendar": "~2.4.0"
+  }
+}
