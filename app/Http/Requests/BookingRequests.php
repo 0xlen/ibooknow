@@ -28,7 +28,8 @@ class BookingRequests extends Request {
             'class'      =>  'string',
             'student_id' =>  'string',
             'email'      =>  'required|email',
-            'time'       =>  'required',
+            'start_time' =>  'required|date_format:"H:i"|before:end_time',
+            'end_time'   =>  'required|date_format:"H:i"',
         ];
     }
 

@@ -23,30 +23,38 @@ class HomeController extends Controller {
     public function postAdd(BookingRequests $request)
     {
         $input = $request->all();
+        $startTime = strtotime($input['month'].'/'. $input['day']. ' ' .$input['start_time']);
+        $endTime   = strtotime($input['month'].'/'. $input['day']. ' ' .$input['end_time']);
+
+        if ( ($endTime - $startTime) % 3600 != 0 ) {
+            return response()->json(['bookingTime' => '預約時間需以 1 小時單位 Booking time required in 1 hour units'], 422);
+        }
+
+        $summary     = '程式課程 '. $input['start_time']. ' - ' .$input['end_time'];
+        $description = 'Name: ' . $input['full_name'] . PHP_EOL .
+                       'Class: '. $input['class'] . ' ('. $input['student_id'] . ')' . PHP_EOL .
+                       'Email: '. $input['email'] . PHP_EOL;
+        $description .= (isset($input['message'])) ? $input['message'] : '' ;
 
         $event = new \Google_Service_Calendar_Event([
-            'summary' => 'Google I/O 2015',
-            'location' => '800 Howard St., San Francisco, CA 94103',
-            'description' => 'A chance to hear more about Google\'s developer products.',
+            'summary' => $summary,
+            'description' => $description,
             'start' => [
-                'dateTime' => '2015-11-05T09:00:00-07:00',
-                'timeZone' => 'America/Los_Angeles',
+                'dateTime' => date(DATE_RFC3339, $startTime),
+                'timeZone' => 'Asia/Taipei',
             ],
             'end' => [
-                'dateTime' => '2015-11-06T17:00:00-07:00',
-                'timeZone' => 'America/Los_Angeles',
-            ],
-            'recurrence' => [
-                'RRULE:FREQ=DAILY;COUNT=2'
+                'dateTime' => date(DATE_RFC3339, $endTime),
+                'timeZone' => 'Asia/Taipei',
             ],
             'attendees' => [
-                ['email' => 'lpage@example.com'],
+                ['email' => $input['email']],
             ],
             'reminders' => [
                 'useDefault' => FALSE,
                 'overrides' => [
                     ['method' => 'email', 'minutes' => 24 * 60],
-                    ['method' => 'popup', 'minutes' => 10],
+                    ['method' => 'popup', 'minutes' => 30],
                 ],
             ],
         ]);
@@ -55,7 +63,7 @@ class HomeController extends Controller {
 
         return response()->json([
             'success'  =>  [
-                'message'  =>  '成功預約 Your booking was successful.'
+                'message'  =>  '已成功預約 Your booking was successful.'
             ]
         ]);
     }
