@@ -34,6 +34,8 @@
 
 	<div id='calendar'></div>
 
+    <div id="modal1" class="modal modal-fixed-footer"></div>
+
 </body>
 </html>
 
@@ -61,16 +63,25 @@
             },
 			
 			eventClick: function(event) {
-                console.log(event);
 				return false;
 			},
+
+            dayClick: function(moment, jsEvent, view) {
+                var param = '?month=' + (moment.month()+1) + '&day=' + moment.date();
+                $('#modal1').load("{{ url('/add') }}" + param, function() {
+                    $(this).openModal();
+                });
+
+                // change the day's background color just for fun
+                // $(this).css('background-color', 'red');
+            },
 
 			loading: function(bool) {
 				$('#loading').toggle(bool);
 			}
 			
 		});
-		
+
 	});
 
 </script>
