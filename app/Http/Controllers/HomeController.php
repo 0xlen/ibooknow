@@ -12,7 +12,11 @@ class HomeController extends Controller {
      */
     public function getIndex()
     {
-        return view('home');
+        $data = [];
+        if (file_exists(public_path('news.txt'))) {
+            $data['news'] = file_get_contents(public_path('news.txt'));
+        }
+        return view('home', $data);
     }
 
     public function getAdd()

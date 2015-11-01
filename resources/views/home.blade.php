@@ -36,6 +36,19 @@
 
     <div id="modal1" class="modal modal-fixed-footer"></div>
 
+    @if (isset($news))
+    <!-- Modal Structure -->
+    <div id="modalNews" class="modal">
+        <div class="modal-content">
+          <h4>注意事項 Notice</h4>
+          {!! nl2br(e($news)) !!}
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">OK</a>
+        </div>
+    </div>
+    @endif
+
 </body>
 </html>
 
@@ -45,6 +58,10 @@
 <script>
 
 	$(document).ready(function() {
+
+        @if (isset($news))
+            $('div#modalNews').openModal();
+        @endif
 	
 		$('#calendar').fullCalendar({
 

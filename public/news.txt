@@ -1,0 +1,23 @@
+1. 系統還在開發, 歡迎跟我回報 Bug
+System is still under developing, welcome report issues to me.
+
+2. 期中考 及 期末考 當週無法安排課程
+It is not acceptable to booking your class in midterm week and finalterm week
+
+3. 104學年各週可預約時段為
+Available booking times in 104 academic year
+
+    星期一 Mon.  17:30 - 21:00
+    星期二 Tue.  17:30 - 21:00
+    星期三 Wed.  17:30 - 21:00
+    星期四 Thu.  13:00 - 21:00
+    星期五 Fri.  13:00 - 21:00
+
+    如遇天災人禍國定假日, 預約後另行通知
+    If your booking is on vacation or any unpredictable factors, I will mail you.
+
+4. 不要把系統玩壞 拜託拜託
+Watch out your input.
+
+如果有任何問題 歡迎來信 0xlen@ntut.edu.tw
+If you have any questions, please mail to 0xlen [at] ntut.edu.tw

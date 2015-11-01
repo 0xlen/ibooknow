@@ -15,7 +15,25 @@
 
 	</head>
 <body>
-	@yield('content')
+
+    <div class="container">
+        <div class="row">
+            <blockquote>
+                <ul>
+                    <li><b>iBookNow Beta (0.1.0b)</b></li>
+                    <li>Author : Eason Cao</li>
+                    <li>Email  : 0xlen [at] ntut.edu.tw</li>
+                </ul>
+            </blockquote>
+        </div>
+
+        <div class="row">
+            @yield('content')
+        </div>
+
+        <span class="grey-text">iBookNow Beta &copy; {{ date('Y') }} Eason Cao, All rights reserved.</span>
+    </div>
+
 	<!-- Scripts -->
 	<script src="{{ url('js/all.js') }}"></script>
 
