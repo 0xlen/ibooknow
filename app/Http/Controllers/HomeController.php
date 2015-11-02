@@ -32,6 +32,10 @@ class HomeController extends Controller {
 
         if ( ($endTime - $startTime) % 3600 != 0 ) {
             return response()->json(['bookingTime' => '預約時間需以 1 小時單位 Booking time required in 1 hour units'], 422);
+        } else if ($startTime < strtotime('now')) {
+            return response()->json(['bookingTime' => '過去的時光就讓他去吧 Please bring me back to past if you want to book this time.'], 422);
+        } else if ( $this->_isConflict($startTime, $endTime) ) {
+            return response()->json(['conflict' => '有人已經預約該時段囉 Your booking conflict with other student.'], 422);
         }
 
         $summary     = '程式課程 '. $input['start_time']. ' - ' .$input['end_time'];
@@ -81,29 +85,22 @@ class HomeController extends Controller {
         // Print the next 10 events on the user's calendar.
         $calendarId = '5sbpquu8mg8t01eue4iv8s6cuk@group.calendar.google.com';
         $event = $service->events->insert($calendarId, $event);
+    }
 
-        /*
-        $optParams = array(
-            'maxResults' => 10,
-            'orderBy' => 'startTime',
-            'singleEvents' => TRUE,
-            'timeMin' => date('c'),
-        );
-        $results = $service->events->listEvents($calendarId, $optParams);
+    private function _isConflict($startTime, $endTime) {
+        $client = $this->_getClient();
+        $service = new \Google_Service_Calendar($client);
 
-        if (count($results->getItems()) == 0) {
-            print "No upcoming events found.\n";
-        } else {
-            print "Upcoming events:\n";
-            foreach ($results->getItems() as $event) {
-                $start = $event->start->dateTime;
-                if (empty($start)) {
-                    $start = $event->start->date;
-                }
-                printf("%s (%s)\n", $event->getSummary(), $start);
-            }
-        }
-        */
+        $calendarId = '5sbpquu8mg8t01eue4iv8s6cuk@group.calendar.google.com';
+        $e = [
+            'timeMin'  => date(DATE_RFC3339, $startTime),
+            'timeMax'  => date(DATE_RFC3339, $endTime),
+            'timeZone' => 'Asia/Taipei',
+        ];
+
+        $events = $service->events->listEvents($calendarId, $e);
+
+        return (count($events->getItems()) > 0) ? true : false ;
     }
 
     private function _getClient() {

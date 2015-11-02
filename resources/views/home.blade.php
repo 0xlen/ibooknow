@@ -36,6 +36,16 @@
 
     <div id="modal1" class="modal modal-fixed-footer"></div>
 
+    <div id="eventModal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+          <h4 id="eventTitle"></h4>
+          <blockquote></blockquote>
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Close</a>
+        </div>
+    </div>
+
     @if (isset($news))
     <!-- Modal Structure -->
     <div id="modalNews" class="modal">
@@ -80,6 +90,16 @@
             },
 			
 			eventClick: function(event) {
+                $('div#eventModal').find('h4#eventTitle').text(event.title);
+
+                var startTime = moment(event.start).format('MMMM Do YYYY, h:mm'),
+                    endTime = moment(event.end).format('MMMM Do YYYY, h:mm');
+                var text =  "<p>Start Time: " + startTime + "</p>";
+                    text += "<p>End Time: "   + endTime + "</p>";
+                    text += event.description.replace(/([^>])\n/g, '$1<br/>\n');
+
+                $('div#eventModal').find('blockquote').html(text);
+                $('#eventModal').openModal();
 				return false;
 			},
 
