@@ -1,23 +1,46 @@
-## Laravel PHP Framework
+## ibooknow
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+A easy appointment system for tutor and students.  
+connect and extend your google calendar
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+## requirement
+Google calendar api authentication
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+## setup
+1. `composer install`
 
-## Official Documentation
+2. public your calendar and change your calendar ID at line:
+   86 and line: 94 in `app/Http/Controllers/HomeController.php`
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+    ```
+    $calendarId = '5sbpquu8mg8t01eue4iv8s6cuk@group.calendar.google.com';
+    ```
 
-## Contributing
+3. create these files and input your `client secret` and     
+   `refresh_token`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+   `config/google/client_secret.json`
+
+   `config/google/.refresh_token`
+
+   (important! use [Google OAuth 2.0 Playground][googleplayground] to get your refresh token)
+
+   **create your own project to get API keys in [Google API Console][googleapiconsole] and create new OAuth 2.0 (web application) credentials, download as .json file.**
+
+  **By use Google OAuth2.0 Playground with custom Client ID and secret settings, you can get your own refresh currectly.**
+
+  **See more detail in [this video][generaterefreshtoken].**
+
+4. Run your own calendar
 
 ### License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+[MIT license](http://opensource.org/licenses/MIT)
+
+
+
+[googleplayground]: https://developers.google.com/oauthplayground "Google Playground"
+
+[googleapiconsole]:https://console.developers.google.com/apis/credentials?project=sincere-venture-111420 "Google API Console"
+
+[generaterefreshtoken]:https://www.youtube.com/watch?v=hfWe1gPCnzc "Generating a refresh token for YouTube API calls using the OAuth playground"
